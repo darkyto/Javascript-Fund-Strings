@@ -38,7 +38,7 @@ var checkBrackets = function (input) {
 	}
 	if ( pbrackets !=0 
 		|| conclusiveArr[0] != '(' 
-			|| conclusiveArr[conclusiveArr.length-1] != ')'
+		|| conclusiveArr[conclusiveArr.length-1] != ')'
 		|| conclusiveArr.length %2 !=0) {
 		return false;
 }

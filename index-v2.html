@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" title="main" href="styles/main.css">
+	<link rel="alternate stylesheet" type="text/css" title="contrast" href="styles/contrast.css">
+	<link rel="alternate stylesheet" type="text/css" title="minimal" href="styles/main-minimal.css">
+	<title>JavaScript - Homework 00? -</title>
+	<script type="text/javascript">
+	function togglediv(id) {
+    var div = document.getElementById(id);
+    div.style.display = div.style.display == "none" ? "block" : "none";
+	}
+	</script>
+</head>
+<body>
+<div class="wrapper">
+		<header>
+			<h1>Homework 008 - String - V.2.001</h1>
+		</header>
+		<div class="display-menu">
+			<form>
+				<input type="submit" onclick="switch_style('main');return false;" name="main" value="Main Theme" id="main">
+				<input type="submit" onclick="switch_style('minimal');return false;" name="minimal" value="Minimal" id="minimal">
+				<input type="submit" onclick="switch_style('contrast');return false;" name="contrast" value="Contrast" id="contrast">
+			</form>
+		</div>
+		<nav>
+			<span>Choose task: </span>
+			<ul>
+				<li><button onclick="togglediv('task1')">1</button></li>
+				<li><button onclick="togglediv('task2')">2</button></li>
+				<li><button onclick="togglediv('task3')">3</button></li>
+				<li><button onclick="togglediv('task4')">4</button></li>
+				<li><button onclick="togglediv('task5')">5</button></li>
+				<li><button onclick="togglediv('task6')">6</button></li>
+				<li><button onclick="togglediv('task7')">7</button></li>
+				<li><button onclick="togglediv('task8')">8</button></li>
+				<li><button onclick="togglediv('task9')">9</button></li>
+				<li><button onclick="togglediv('task10')">10</button></li>
+				<li><button onclick="togglediv('task11')">11</button></li>
+				<li><button onclick="togglediv('task12')">12</button></li>
+			</ul>
+		</nav>
+		<div class="legend">single click to expand/collapse each task - also JavaScripts can be tested via console</div>
+		<main class="content">
+		<div id="task1">
+			<h2>Problem 001 - Reverse string</h2>
+			<p class="description"></p>
+			<article>
+<pre class="code-print">
+	var reverseText = function(str) {
+		var newStr = '';
+		for (var i = str.length - 1; i >= 0; i-=1) {
+			newStr += str[i];
+		}
+		return newStr;
+	};
+	var reverseText2 = function(str) {
+		var newStr = [];
+		for (var i = str.length - 1 , j = 0; i >= 0; i-=1, j+=1) {
+			newStr[j] = str[i];
+		}
+		return newStr.join('');
+	};
+	var reverseText3 = function(str) {
+		var newStr = [];
+		var len = str.length;
+		for (var i = 0; i <= len; i++) {
+			newStr.push(str.charAt(len- i));
+		}
+		return newStr.join('');
+	};
+	var reverseText4 = function(str) {
+		return str.split('').reverse().join('');
+	};
+	var reverseText5 = function(str) {
+		var len = str.length;
+		var newStr = '';
+		while (len > 0) {
+			newStr += str[len - 1];
+			len -= 1;
+		}
+		return newStr;
+	};
+	var reverseText6 = function(str) {
+		return (str === '') ? '' : reverseText6(str.substr(1)) + str.charAt(0);
+	};
+	var test = 'ABCDEFGHIJKLMNOP';
+	var result = reverseText(test);
+	console.log('Original: '+test);
+	console.log('Reversed: '+result);
+</pre>
+				<aside>source file : javascript.js</aside>
+			</article>
+		</div>
+		<div id="task2">
+			<h2>Problem 002 - Correct brackets</h2>
+			<p class="description"></p>
+			<article>
+<pre class="code-print">
+	var checkBrackets = function(input) {
+	var i = 0;
+	var stack = [];
+	while (input[i]) {
+		if (input[i] === '(' || input[i] === '[' || input[i] === '{') {
+			stack.push(input[i]);
+			if (input[i] === '(' && input[i+1] === ')') { //in case we have empty brackets ()
+				return false;
+			}
+			if (input[i] === '[' && input[i+1] === ']') { //in case we have empty brackets []
+				return false;
+			}
+			if (input[i] === '{' && input[i+1] === '}') { //in case we have empty brackets {}
+				return false;
+			}
+		}
+		if (input[i] === ')'  || input[i] === ']' || input[i] === '}') {
+			if (stack.length === 0 ) return false;
+			else if (!isMatchingPair( stack.pop() , input[i])) return false;
+		}
+		i+=1;
+	}
+	function isMatchingPair(character1, character2){
+   		if(character1 === '(' && character2 === ')') return 1;
+   		else if (character1 === '[' && character2 === ']') return 1; //extend it..
+   		else if (character1 === '{' && character2 === '}') return 1;
+   		else return false;
+	}
+	if (stack.length === 0) return true;
+	else return false;
+};
+
+	var testBrackets = [
+		'((a+b)/5-d)',
+		'(a+b)(-2)',
+		'())1+)a+b)(-2 * 3)',
+		'((.)+(.))',
+		')(a+b))',
+		'()4+4',
+		'{[(2+2)/(4*4)]}'
+	];
+	for (var i = testBrackets.length ; i > 0; i--) {
+		console.log(testBrackets[testBrackets.length-i] 
+		+ ' ' + checkBrackets(testBrackets[testBrackets.length-i]));
+	}
+</pre>
+				<aside>source file : javascript.js</aside>				
+			</article>
+		</div>
+		<div id="task3">
+			<h2>Problem 003 - Count substring occurance</h2>
+			<p class="description"></p>
+			<article>
+<pre class="code-print">
+	var countSubtext = function (str, sub) {
+		var count = 0;
+		var len = str.length;
+			for (var i = 0; i < len - sub.length + 1; i++) {
+			if (str.substr(i, sub.length) === sub) {
+				count += 1;
+				i += sub.length;
+			}
+		}
+		return count;
+	};
+	var countSubtext2 = function (str, sub) {
+		var count = 0;
+		var len = str.length;
+		for (var i = 0; i < len - sub.length + 1; i++) {
+			if (str.substring(i, i+sub.length) === sub) {
+				count += 1;
+				i += sub.length;
+			}
+		}
+		return count;
+	};
+	var countSubtext3 = function(str, sub , caseIs) {
+		if (caseIs || caseIs > 0 || caseIs === undefined) {
+			str = str.toLowerCase();
+			sub = sub.toLowerCase();
+		}
+		var count = 0;
+		while(str.indexOf(sub) > -1) {
+			count += 1;
+			str = str.substr(str.indexOf(sub) + sub.length);
+		}
+		return count;
+	};
+	var countSubtext4 = function(str, sub) {
+		var count = 0;
+		str = str.toLowerCase();
+		var re = new RegExp(sub.toLowerCase(),'g');
+		while(str.search(re) > -1) {
+			count += 1;
+			str = str.substr(str.indexOf(sub) + sub.length);
+		}
+		return count;
+	};
+	var subText = 'in';
+	var sampleText = 'We are living in an yellow submarine. 
+	We don\'t have anything else. inside the submarine is very tight. 
+	So we are drinking all the day. We will move out of it in 5 days.';
+
+	console.log(countSubtext(sampleText, subText));
+</pre>
+				<aside>source file : javascript.js</aside>				
+			</article>
+		</div>
+		<div id="task4">
+			<h2>Problem 004 - Parse tags</h2>
+			<p class="description">You are given a text. Write a function that changes the text in all regions:</p>
+			<article>
+<pre class="code-print">
+var parseTags = function (str, tags) {
+	var len = str.length;
+	var result ='';
+	for (var i = 0; i < str.length; i++) {
+		if (str.substr(i, tags[0].length) === tags[0]) { 
+			str = str.replace(tags[0], '');
+			while (i < len - tags[0].length && str.substr(i, tags[1].length) !== tags[1]) {
+				result += '' + str[i].toLowerCase();
+				i +=1;
+			}
+			str = str.replace(tags[1], '');
+		}
+		if (str.substr(i, tags[2].length) === tags[2]) { 
+			str = str.replace(tags[2], '');
+			while (i < len - tags[2].length && str.substr(i, tags[3].length) !== tags[3]) {
+				result += '' + str[i].toUpperCase();
+				i +=1;
+			}
+			str = str.replace(tags[3], '');
+		}
+		if (str.substr(i, tags[4].length) === tags[4]) { 
+			str = str.replace(tags[4], '');
+			while (i < len - tags[4].length && str.substr(i, tags[5].length) !== tags[5]) {
+				var rand = Math.floor( (Math.random() * 10) );
+				if (rand >= 5) {
+					result += '' + str[i].toUpperCase();					
+				}
+				else {
+					result += '' + str[i].toLowerCase();
+				}
+				i +=1;
+			}
+			str = str.replace(tags[5], '');
+		}
+		result += str[i]; 
+	}
+	return result;
+};
+var tags = ['see javascript.js for the sample tags'];
+var text = 'see javascript.js for the sample text';
+console.log(text);
+console.log('---------------');
+console.log(parseTags(text, tags));
+</pre>
+				<aside>source file : javascript.js</aside>				
+			</article>
+		</div>
+		<div id="task5">
+			<h2>Problem 005 - nbsp</h2>
+			<p class="description">Write a function that replaces non breaking white-spaces in a text with &nbsp;</p>
+			<article>
+<pre class="code-print">
+	function replaceWhiteSpace(input) {
+		while (input.search(' ') > -1) {
+			input = input.replace(' ','&nbsp;');
+		}
+		return input;
+	}
+	function replaceWhiteSpace2(input) {
+		var result = '';
+		for (var i = 0; i < input.length; i++) {
+			if (input[i] === ' ') {
+				result += '&nbsp;';
+			}
+			else {
+				result += input[i];
+			}
+		}
+		return result;
+	}
+	function replaceWhiteSpace3(input) {
+		var result = [];
+		for (var i = 0; i < input.length; i++) {
+			if (input[i] === ' ') result[i] = '&nbsp;';
+			else result[i] = input[i];		
+		}
+		return result.join('');
+	}
+	function replaceWhiteSpace4 (input) {
+		return input.replace(/[ ]/g,'&nbsp;');
+	}
+	var sampleText = '001 Abra Ca Dabra Sin Saladin 009!';
+	console.log('Original text: '+sampleText);
+	console.log('Replaced text: '+replaceWhiteSpace4(sampleText));
+</pre>
+				<aside>source file : javascript.js</aside>				
+			</article>
+		</div>	
+		<div id="task6">
+			<h2>Problem 006 - Extract text from HTML</h2>
+			<p class="description">Write a function that extracts the content of a html page given as text.
+The function should return anything that is in a tag, without the tags.</p>
+			<article>
+<pre class="code-print">
+	function extractHTML(input) {
+		var result = '';
+		result =  input.replace(/<[^>]*>/g,'');
+		return result;
+	}
+	function extractHTML2(input) {
+		var result = '';
+		for (var i = 0; i < input.length; i++) {
+			if (input[i] === '<') {
+				while (input[i] !== '>') {
+					i+=1;
+				}
+			}
+			else result += input[i];	
+		}
+		return result;
+	}
+	function extractHTML3(input) {
+		var result = [];
+		for (var i = 0; i < input.length; i++) {
+			if (input[i] === '<') {
+				while(input[i] !== '>') i += 1;
+			}
+			else result.push(input[i]);
+		}
+		return result.join('');
+	}
+	console.log(extractHTML3(sampleHTML));
+</pre>
+				<aside>source file : javascript.js</aside>				
+			</article>
+		</div>	
+		<div id="task7">
+			<h2>Problem 007 - Parse URL</h2>
+			<p class="description">Write a script that parses an URL address given in the format: [protocol]://[server]/[resource] and extracts from it the [protocol], [server] and [resource] elements.
+Return the elements in a JSON object.</p>
+			<article>
+<pre class="code-print">
+function parseURL(input) {
+	var urlObject = {
+		protocol : '',
+		server : '',
+		resource : ''
+	};
+	var num = input.indexOf('/');
+	urlObject.protocol = input.substring( 0, input.indexOf('/', parseInt(num+1))-2 );
+	urlObject.server = input.substring( input.indexOf('/', parseInt(num+1))+1, input.indexOf('/', parseInt(num+2)) );
+	urlObject.resource = input.substring( input.indexOf('/', parseInt(num+2) ) );
+	return urlObject;
+}
+function parseURL2(inputURL) {
+	var objectURL = {
+		protocol : '',
+		server : '',
+		resource : ''
+	};
+	objectURL.protocol = inputURL.match(/(.*):\/\//)[1];
+	objectURL.server = inputURL.match(/:\/\/(.*?)\//)[1];
+	objectURL.resource = inputURL.match(/[a-zA-Z](\/.*)/)[1];
+	return objectURL;
+}
+var sampleURL = 'http://telerikacademy.com/Courses/Courses/Details/239';
+console.log(sampleURL);
+console.log('The URL above as a JSON:');
+console.log(parseURL(sampleURL));
+</pre>
+				<aside>source file : javascript.js</aside>				
+			</article>
+		</div>
+		<div id="task8">
+			<h2>Problem 008 - Replace tags</h2>
+			<p class="description">Write a JavaScript function that replaces in a HTML document given as string all the tags a href with corresponding tags url=</p>
+			<article>
+<pre class="code-print">
+function replaceHref(input) {
+	var result = '';
+	result = input.replace(/<\a href=/g, '[URL=');
+	result = result.replace(/">/g, '"]');
+	result = result.replace(/<\/a>/g, '[/URL]');
+	return result;
+}
+function replaceHref2(input) {
+	var anyTags = input.indexOf('<\a href=') > -1;
+	if (anyTags) {
+		while (input.indexOf('<\a href=') > -1) {
+		input = input.replace('<\a href=','[URL=');
+		input = input.replace('">','"]');
+		input = input.replace('</\a>','[/URL]');
+		}
+	}
+	return input;
+}
+var sampleHREF =' <\p>Please visit <\a href="http://academy.telerik.com">our site</\a> to choose a training course. Also visit <\a href="www.devbg.org">our forum</\a> to discuss the courses.</\p>';
+console.log('ORIGINAL input: '+ sampleHREF);
+console.log(' ');
+console.log('REPLACED output: '+replaceHref(sampleHREF));
+</pre>
+				<aside>source file : javascript.js</aside>				
+			</article>
+		</div>
+		<div id="task9">
+			<h2>Problem 009 - Extract e-mails</h2>
+			<p class="description">Write a function for extracting all email addresses from given text.
+All sub-strings that match the format @ should be recognized as emails.
+Return the emails as array of strings.</p>
+			<article>
+<pre class="code-print">
+	function extractEmails(str) { // basic email matches
+		return str.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+	}
+	function extractEmails2(str){ // less strick version
+		return str.match(/[a-zA-Z0-9._-]+@+[a-zA-Z0-9._-]+/g);
+	}
+	function extractEmails3(str){ // as the original tasks wants (all words with #)
+		var result = [];
+		var temp = str.split(' ');
+		for (var i = 0; i < temp.length; i++) {
+			if (temp[i].indexOf('@') > -1) {
+				result.push(temp[i]);
+			}
+		}
+		return result;
+	}
+	var sampleEmailtext = 'ala bala nica {gul gul} em_nick@abv.bg Z-emnick@gmai.com gra[gra@] piu@a mini4k! istinski@mail.bg'; 
+	var emailsOutput = extractEmails(sampleEmailtext);
+</pre>
+				<aside>source file : javascript.js</aside>				
+			</article>
+		</div>
+		<div id="task10">
+			<h2>Problem 010 - Find palindromes</h2>
+			<p class="description">Write a program that extracts from a given text all palindromes, e.g. "ABBA", "lamal", "exe".</p>
+			<article>
+<pre class="code-print">
+	var findPalindromes = function(str) {
+
+		var result = [];
+		var tempArr = str.split(' ');
+		for (var i = 0; i < tempArr.length; i+=1) {
+			if (checkWord(tempArr[i]) && tempArr[i].length > 1) {
+				result.push(tempArr[i]);
+			}
+		}
+		return result;
+
+		function checkWord(word) {
+			var len = word.length;
+			for (var i = 0; i < len/2; i++) {
+				if (word.charAt(i) !== word.charAt(len - 1 - i)) {
+	            return false;
+	        	}
+			}
+			return true;
+		}
+	};
+	var findPalindromes2 = function(str) {
+	 	var result = [];
+	 	var wordsArr = str.split(' ');
+	 	for (var i = wordsArr.length - 1; i >= 0; i--) {
+	 		if (checkWord(wordsArr[i])) {
+	 			result.push(wordsArr[i]);
+	 		}
+	 	}
+	 	return result;
+
+	 	function checkWord(word) {
+	 		if (word.length > 1 && word === word.split('').reverse().join('')) return true;
+	 		else return false;
+	 	}
+	}
+	var samplePalinText = '1233321 Otto wants to have a dog. He walks up the street and is about to step into the pets '+
+	'store when he sees a sign that reads ‘ Step on no pets ’ hanging on the door. Otto sees a lot of animals at the '+
+	'pets store. He sees the birds. He sees the squirrels.He sees the lamal. ABBA sees the dogs. “How much does '+
+	'the dog cost?” Otto says. “Ten dollars,” the ABBA says. Otto gives the man tendollars. Otto buys the dog. The dog '+
+	'walks home with Otto. Now Otto has a dog. “Thank God now I have a dog,” he says to himself."';
+	var resultPalindromes = findPalindromes2(samplePalinText);
+	console.log(resultPalindromes);
+</pre>
+				<aside>source file : javascript.js</aside>				
+			</article>
+		</div>
+		<div id="task11">
+			<h2>Problem 011 - String format</h2>
+			<p class="description">Write a function that formats a string using placeholders.
+The function should work with up to 30 placeholders and all types.</p>
+			<article>
+<pre class="code-print">
+	var placeHolders = function(input, placeholders) {
+		var pl = placeholders;
+		for (var i = pl.length - 1; i >= 0; i--) {
+			while (input.indexOf('{'+i+'}') > -1){
+				input = input.replace('{'+i+'}' , pl[i]);
+			}
+		}
+		return input;	
+	};
+	var holders = [100200, 'algoCoding', 'alert("hi")'];
+	var sampleText = 'ala {0} bala {1} nica {2} ala {0}';
+	console.log('Original text : '+sampleText);
+	console.log('Replaced placehodlers: '+placeHolders(sampleText, holders));
+</pre>
+				<aside>source file : javascript.js</aside>				
+			</article>
+		</div>
+		<div id="task12">
+			<h2>Problem 012 - Generate list</h2>
+			<p class="description">Write a function that creates a HTML ul> using a template for every HTML li>.
+The source of the list should be an array of elements.
+Replace all placeholders marked with with the value of the corresponding property of the object./p>
+			<article>
+<pre class="code-print">
+var generateList = function(input, objArr) {
+var obj = ['name','age'];
+function generateLi(person) {
+	var cell = input;
+	for (var i = 0; i < obj.length; i++) {
+		while(cell.indexOf('<strong>-{'+obj[i]+'}-</strong>') > -1) {
+			cell = cell.replace( ('-{'+obj[i]+'}-'), person.name);
+		}
+		while(cell.indexOf( '<span>-{'+obj[i]+'}-</span>') > -1) {
+			cell = cell.replace( ('-{'+obj[i]+'}-'), person.age);
+		}
+	}
+	cell = '<li>'+cell+'</li>';
+	return cell;
+}
+var result = '<ul>';
+for (var i = 0; i < objArr.length; i++) {
+	result += generateLi(objArr[i]);
+}
+result += '</ul>';
+return result;
+};
+var generateList2 = function(objArr) { 
+	var list = document.createElement('ul');
+	for (var i = 0; i < objArr.length; i++) {
+		var li = document.createElement('li');
+		var stro = document.createElement('strong');
+		var span = document.createElement('span');
+		stro.appendChild(document.createTextNode(objArr[i].name));
+		span.appendChild(document.createTextNode(objArr[i].age));
+		li.appendChild(stro);
+		li.appendChild(span);
+		list.appendChild(li);
+	}
+	return list;
+};
+var people = [{name: 'Peter', age: 14},{name: 'Maria', age: 28},{name: 'Ivan', age: 50}];
+var sampleHTML = '<strong>-{name}-</strong> <span>-{age}-</span>';
+var peopleList = generateList(sampleHTML, people);
+document.getElementById('foo').appendChild(generateList2(people)); // DOM working variant
+console.log(peopleList);
+</pre>
+	<div data-type="template" id="foo">
+
+	</div>
+				<aside>source file : javascript.js</aside>				
+			</article>
+		</div>			
+
+		</main>				
+</div>
+<script type="text/javascript" src="javascript-v2.js"></script>
+<script type="text/javascript" src="func/css-switcher.js"></script>
+</body>
+</html>

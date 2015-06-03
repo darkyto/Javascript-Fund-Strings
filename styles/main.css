@@ -113,4 +113,7 @@
 	 nav ul li:nth-child(n+13) {
 	 	display: none;
 	 }
-
+	.code-print {
+		widows: 800px;
+		overflow: hidden;
+	}
